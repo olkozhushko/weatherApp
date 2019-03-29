@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Weather.css';
+import './WeatherApp.css';
 import WeatherContent from "./WeatherContent";
 
 
-class App extends Component {
+class WeatherApp extends Component {
   render() {
     return (
       <div className="app-container app">
@@ -18,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default WeatherApp;
