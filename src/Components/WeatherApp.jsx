@@ -13,9 +13,10 @@ class WeatherApp extends Component {
     this.state = {
       country: "",
       city: "",
-      temp: "18",
+      temp: "",
       weatherIcon: "",
-      condition: ""
+      condition: "",
+      error: ""
     }
   }
 
@@ -55,7 +56,9 @@ class WeatherApp extends Component {
           })
         return coords;
       })
-      .catch(error => console.log(error));;
+      .catch(error => this.setState({
+        error: error
+      }));
   }
 
   componentDidMount() {
@@ -70,16 +73,31 @@ class WeatherApp extends Component {
   }
 
   render() {
-    return (
-      <div className="app-container app">
-        <header className="app__header">
-         <h1 className="app__title">Weather App</h1>
-        </header>
-        <main>
-          <WeatherContent data={this.state}/>
-        </main>
-      </div>
-    );
+    const error = this.state.error;
+
+    const styleError = {
+      font: "2rem/2.1rem helvetica, sans-serif",
+      color: "#ffffff",
+      textTransform: "uppercase"
+    }
+
+    if(!error) {
+      return (
+        <div className="app-container">
+          <header className="app__header">
+           <h1 className="app__title">Weather App</h1>
+          </header>
+          <main>
+            <WeatherContent data={this.state}/>
+          </main>
+        </div>
+      );
+    } else {
+      return (
+        <div style={styleError}>{error}</div>
+      )
+    }
+    
   }
 }
 
