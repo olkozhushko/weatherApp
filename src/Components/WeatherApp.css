@@ -1,11 +1,10 @@
 .app-container {
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(76deg, rgb(75, 140, 145), rgb(74, 61, 95))
-}
-
-.weather-box {
   width: 50%;
   margin: 0 auto;
   padding-top: 200px;
+  color: #ffffff;
 }
+
+
+
+
