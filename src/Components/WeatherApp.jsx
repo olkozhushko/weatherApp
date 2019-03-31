@@ -3,10 +3,6 @@ import './WeatherApp.css';
 import WeatherContent from "./WeatherContent";
 
 
-// const weatherImages = {
-//   cloudy: ""
-// }
-
 class WeatherApp extends Component {
   constructor(props) {
     super(props);
@@ -85,7 +81,7 @@ class WeatherApp extends Component {
 
     if(!error) {
       return (
-        <div className="app-container">
+        <div className="app app-container">
           <header className="app__header">
            <h1 className="app__title">Weather App</h1>
           </header>
