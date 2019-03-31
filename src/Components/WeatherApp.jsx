@@ -22,24 +22,34 @@ class WeatherApp extends Component {
 
   getGeolocation() {
     //check if browser support HTML geolocation 
+    console.log(navigator.geolocation)
     if(navigator.geolocation) {
       return new Promise(function(resolve, reject) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+
+        function showPosition(position) {
           let coords = {};
           coords.latitude = position.coords.latitude;
           coords.longitude = position.coords.longitude;
   
           resolve(coords);
-        });
+        }
+
+        function showError(error) {
+          reject(new Error('ERROR(' + error.code + '): ' + error.message));
+        }
       })
     } else {
-      return new Promise((reject) => reject(new Error("Geolocation is not supported by this browser.")));
+
+      return new Promise((reject) => {
+        reject(new Error("Geolocation is   not supported by this browser."));
+      });
     }
   
   }
 
   getWeatherData() {
-
+    
     this.getGeolocation()
       .then(coords => {
         fetch(`https://fcc-weather-api.glitch.me//api/current?lon=${coords.longitude}&lat=${coords.latitude}`)
@@ -54,11 +64,9 @@ class WeatherApp extends Component {
              condition: data.weather[0].main
            })
           })
-        return coords;
-      })
-      .catch(error => this.setState({
+      }, error => this.setState({
         error: error
-      }));
+      }))
   }
 
   componentDidMount() {
@@ -73,13 +81,7 @@ class WeatherApp extends Component {
   }
 
   render() {
-    const error = this.state.error;
-
-    const styleError = {
-      font: "2rem/2.1rem helvetica, sans-serif",
-      color: "#ffffff",
-      textTransform: "uppercase"
-    }
+    const error = (this.state.error).toString();
 
     if(!error) {
       return (
@@ -94,7 +96,9 @@ class WeatherApp extends Component {
       );
     } else {
       return (
-        <div style={styleError}>{error}</div>
+        <div className="error">
+          <h1 className="error__title">{error}</h1>
+        </div>
       )
     }
     

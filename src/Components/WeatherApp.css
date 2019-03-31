@@ -77,6 +77,21 @@
   animation: weatherIconMove 2.5s linear infinite;
 }
 
+/* Error-geologation message styling*/
+.error {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.error__title {
+  color: #fcf5f5;
+  font-size: 2.5rem;
+  width: 100%;
+  text-align: center;
+}
+
 /* finish weather-box styling */
 
 @keyframes weatherIconMove {
@@ -126,4 +141,5 @@
   .status-icon {
     animation: none;
   }
+
 }
